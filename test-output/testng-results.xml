@@ -1,0 +1,211 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testng-results ignored="0" total="11" passed="9" failed="2" skipped="0">
+  <reporter-output>
+  </reporter-output>
+  <suite started-at="2026-01-07T17:37:53 IST" name="Suite" finished-at="2026-01-07T17:41:38 IST" duration-ms="224795">
+    <groups>
+    </groups>
+    <test started-at="2026-01-07T17:37:53 IST" name="PLPTest" finished-at="2026-01-07T17:39:30 IST" duration-ms="96618">
+      <class name="TestPages.PLPTest">
+        <test-method is-config="true" signature="setUpClass()[pri:0, instance:TestPages.PLPTest@5149d738]" started-at="2026-01-07T17:37:53 IST" name="setUpClass" finished-at="2026-01-07T17:38:20 IST" duration-ms="26149" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- setUpClass -->
+        <test-method is-config="true" signature="init()[pri:0, instance:TestPages.PLPTest@5149d738]" started-at="2026-01-07T17:38:20 IST" name="init" finished-at="2026-01-07T17:38:20 IST" duration-ms="2" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- init -->
+        <test-method signature="TC_01_ClickOnDialShapeFilter()[pri:1, instance:TestPages.PLPTest@5149d738]" started-at="2026-01-07T17:38:20 IST" name="TC_01_ClickOnDialShapeFilter" finished-at="2026-01-07T17:38:30 IST" duration-ms="10566" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- TC_01_ClickOnDialShapeFilter -->
+        <test-method signature="TC_02_ClickOnAttachmentTypeFilter()[pri:2, instance:TestPages.PLPTest@5149d738]" started-at="2026-01-07T17:38:30 IST" name="TC_02_ClickOnAttachmentTypeFilter" finished-at="2026-01-07T17:38:41 IST" duration-ms="10395" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- TC_02_ClickOnAttachmentTypeFilter -->
+        <test-method signature="TC_03_ClickOnDialColorFilter()[pri:3, instance:TestPages.PLPTest@5149d738]" started-at="2026-01-07T17:38:41 IST" name="TC_03_ClickOnDialColorFilter" finished-at="2026-01-07T17:38:51 IST" duration-ms="10404" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- TC_03_ClickOnDialColorFilter -->
+        <test-method signature="TC_04_ClickOnStrapColorFilter()[pri:4, instance:TestPages.PLPTest@5149d738]" started-at="2026-01-07T17:38:51 IST" name="TC_04_ClickOnStrapColorFilter" finished-at="2026-01-07T17:39:07 IST" duration-ms="16256" status="FAIL">
+          <exception class="org.openqa.selenium.TimeoutException">
+            <message>
+              <![CDATA[Expected condition failed: waiting for element to be clickable: By.xpath: //div[contains(@class,'usf-facet-values--Swatch')]//button[@title='Black (20)'] (tried for 15 second(s) with 500 milliseconds interval)
+Build info: version: '4.25.0', revision: '8a8aea2337'
+System info: os.name: 'Windows 11', os.arch: 'amd64', os.version: '10.0', java.version: '17.0.7'
+Driver info: org.openqa.selenium.chrome.ChromeDriver
+Capabilities {acceptInsecureCerts: false, browserName: chrome, browserVersion: 143.0.7499.170, chrome: {chromedriverVersion: 143.0.7499.192 (be2c1f4fd45..., userDataDir: C:\Users\LYXELA~1\AppData\L...}, fedcm:accounts: true, goog:chromeOptions: {debuggerAddress: localhost:52753}, goog:processID: 13908, networkConnectionEnabled: false, pageLoadStrategy: normal, platformName: windows, proxy: Proxy(), se:cdp: ws://localhost:52753/devtoo..., se:cdpVersion: 143.0.7499.170, setWindowRect: true, strictFileInteractability: false, timeouts: {implicit: 0, pageLoad: 300000, script: 30000}, unhandledPromptBehavior: dismiss and notify, webauthn:extension:credBlob: true, webauthn:extension:largeBlob: true, webauthn:extension:minPinLength: true, webauthn:extension:prf: true, webauthn:virtualAuthenticators: true}
+Session ID: 7310df7c3bb1bf8f026d4bbd78c654fd]]>
+            </message>
+            <full-stacktrace>
+              <![CDATA[org.openqa.selenium.TimeoutException: Expected condition failed: waiting for element to be clickable: By.xpath: //div[contains(@class,'usf-facet-values--Swatch')]//button[@title='Black (20)'] (tried for 15 second(s) with 500 milliseconds interval)
+Build info: version: '4.25.0', revision: '8a8aea2337'
+System info: os.name: 'Windows 11', os.arch: 'amd64', os.version: '10.0', java.version: '17.0.7'
+Driver info: org.openqa.selenium.chrome.ChromeDriver
+Capabilities {acceptInsecureCerts: false, browserName: chrome, browserVersion: 143.0.7499.170, chrome: {chromedriverVersion: 143.0.7499.192 (be2c1f4fd45..., userDataDir: C:\Users\LYXELA~1\AppData\L...}, fedcm:accounts: true, goog:chromeOptions: {debuggerAddress: localhost:52753}, goog:processID: 13908, networkConnectionEnabled: false, pageLoadStrategy: normal, platformName: windows, proxy: Proxy(), se:cdp: ws://localhost:52753/devtoo..., se:cdpVersion: 143.0.7499.170, setWindowRect: true, strictFileInteractability: false, timeouts: {implicit: 0, pageLoad: 300000, script: 30000}, unhandledPromptBehavior: dismiss and notify, webauthn:extension:credBlob: true, webauthn:extension:largeBlob: true, webauthn:extension:minPinLength: true, webauthn:extension:prf: true, webauthn:virtualAuthenticators: true}
+Session ID: 7310df7c3bb1bf8f026d4bbd78c654fd
+at org.openqa.selenium.support.ui.WebDriverWait.timeoutException(WebDriverWait.java:84)
+at org.openqa.selenium.support.ui.FluentWait.until(FluentWait.java:228)
+at Pages.PLPPage.ClickStrapColorFilter(PLPPage.java:106)
+at TestPages.PLPTest.TC_04_ClickOnStrapColorFilter(PLPTest.java:39)
+at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:77)
+at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+at java.base/java.lang.reflect.Method.invoke(Method.java:568)
+at org.testng.internal.invokers.MethodInvocationHelper.invokeMethod(MethodInvocationHelper.java:139)
+at org.testng.internal.invokers.TestInvoker.invokeMethod(TestInvoker.java:677)
+at org.testng.internal.invokers.TestInvoker.invokeTestMethod(TestInvoker.java:221)
+at org.testng.internal.invokers.MethodRunner.runInSequence(MethodRunner.java:50)
+at org.testng.internal.invokers.TestInvoker$MethodInvocationAgent.invoke(TestInvoker.java:969)
+at org.testng.internal.invokers.TestInvoker.invokeTestMethods(TestInvoker.java:194)
+at org.testng.internal.invokers.TestMethodWorker.invokeTestMethods(TestMethodWorker.java:148)
+at org.testng.internal.invokers.TestMethodWorker.run(TestMethodWorker.java:128)
+at java.base/java.util.ArrayList.forEach(ArrayList.java:1511)
+at org.testng.TestRunner.privateRun(TestRunner.java:829)
+at org.testng.TestRunner.run(TestRunner.java:602)
+at org.testng.SuiteRunner.runTest(SuiteRunner.java:437)
+at org.testng.SuiteRunner.runSequentially(SuiteRunner.java:431)
+at org.testng.SuiteRunner.privateRun(SuiteRunner.java:391)
+at org.testng.SuiteRunner.run(SuiteRunner.java:330)
+at org.testng.SuiteRunnerWorker.runSuite(SuiteRunnerWorker.java:52)
+at org.testng.SuiteRunnerWorker.run(SuiteRunnerWorker.java:95)
+at org.testng.TestNG.runSuitesSequentially(TestNG.java:1256)
+at org.testng.TestNG.runSuitesLocally(TestNG.java:1176)
+at org.testng.TestNG.runSuites(TestNG.java:1099)
+at org.testng.TestNG.run(TestNG.java:1067)
+at org.testng.remote.AbstractRemoteTestNG.run(AbstractRemoteTestNG.java:115)
+at org.testng.remote.RemoteTestNG.initAndRun(RemoteTestNG.java:251)
+at org.testng.remote.RemoteTestNG.main(RemoteTestNG.java:77)
+]]>
+            </full-stacktrace>
+          </exception> <!-- org.openqa.selenium.TimeoutException -->
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- TC_04_ClickOnStrapColorFilter -->
+        <test-method signature="TC_05_ClickOnFirstProduct()[pri:5, instance:TestPages.PLPTest@5149d738]" started-at="2026-01-07T17:39:07 IST" name="TC_05_ClickOnFirstProduct" finished-at="2026-01-07T17:39:30 IST" duration-ms="22765" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- TC_05_ClickOnFirstProduct -->
+      </class> <!-- TestPages.PLPTest -->
+    </test> <!-- PLPTest -->
+    <test started-at="2026-01-07T17:39:30 IST" name="PDPTest" finished-at="2026-01-07T17:40:33 IST" duration-ms="62666">
+      <class name="TestPages.PDPTest">
+        <test-method is-config="true" signature="setUpClass()[pri:0, instance:TestPages.PDPTest@6440112d]" started-at="2026-01-07T17:39:30 IST" name="setUpClass" finished-at="2026-01-07T17:39:54 IST" duration-ms="23662" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- setUpClass -->
+        <test-method is-config="true" signature="init()[pri:0, instance:TestPages.PDPTest@6440112d]" started-at="2026-01-07T17:39:54 IST" name="init" finished-at="2026-01-07T17:40:17 IST" duration-ms="22861" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- init -->
+        <test-method signature="TC_01_clickOnRecommondedProducts()[pri:1, instance:TestPages.PDPTest@6440112d]" started-at="2026-01-07T17:40:17 IST" name="TC_01_clickOnRecommondedProducts" finished-at="2026-01-07T17:40:30 IST" duration-ms="13661" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- TC_01_clickOnRecommondedProducts -->
+        <test-method signature="TC_02_AddProductInCart()[pri:2, instance:TestPages.PDPTest@6440112d]" started-at="2026-01-07T17:40:30 IST" name="TC_02_AddProductInCart" finished-at="2026-01-07T17:40:33 IST" duration-ms="2474" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- TC_02_AddProductInCart -->
+      </class> <!-- TestPages.PDPTest -->
+    </test> <!-- PDPTest -->
+    <test started-at="2026-01-07T17:40:33 IST" name="iniCartTest" finished-at="2026-01-07T17:41:38 IST" duration-ms="65466">
+      <class name="TestPages.MiniCartTest">
+        <test-method is-config="true" signature="setUpClass()[pri:0, instance:TestPages.MiniCartTest@8462f31]" started-at="2026-01-07T17:40:33 IST" name="setUpClass" finished-at="2026-01-07T17:40:57 IST" duration-ms="23888" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- setUpClass -->
+        <test-method is-config="true" signature="initFlow()[pri:0, instance:TestPages.MiniCartTest@8462f31]" started-at="2026-01-07T17:40:57 IST" name="initFlow" finished-at="2026-01-07T17:41:22 IST" duration-ms="25513" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- initFlow -->
+        <test-method signature="TC_01_QuantityIncrease()[pri:1, instance:TestPages.MiniCartTest@8462f31]" started-at="2026-01-07T17:41:22 IST" name="TC_01_QuantityIncrease" finished-at="2026-01-07T17:41:29 IST" duration-ms="6436" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- TC_01_QuantityIncrease -->
+        <test-method signature="TC_02_QuantityDecrease()[pri:2, instance:TestPages.MiniCartTest@8462f31]" started-at="2026-01-07T17:41:29 IST" name="TC_02_QuantityDecrease" finished-at="2026-01-07T17:41:33 IST" duration-ms="4139" status="FAIL">
+          <exception class="org.openqa.selenium.StaleElementReferenceException">
+            <message>
+              <![CDATA[stale element reference: stale element not found in the current frame
+  (Session info: chrome=143.0.7499.170)
+For documentation on this error, please visit: https://www.selenium.dev/documentation/webdriver/troubleshooting/errors#stale-element-reference-exception
+Build info: version: '4.25.0', revision: '8a8aea2337'
+System info: os.name: 'Windows 11', os.arch: 'amd64', os.version: '10.0', java.version: '17.0.7'
+Driver info: org.openqa.selenium.chrome.ChromeDriver
+Command: [d29f380cf25f6585cf145d8e6643d1f2, getElementAttribute {id=f.FDDCB723DDA22AE8D4C537494E52E123.d.078F0FC2744C5059746AEC9B5E43BF8F.e.301, name=value}]
+Capabilities {acceptInsecureCerts: false, browserName: chrome, browserVersion: 143.0.7499.170, chrome: {chromedriverVersion: 143.0.7499.192 (be2c1f4fd45..., userDataDir: C:\Users\LYXELA~1\AppData\L...}, fedcm:accounts: true, goog:chromeOptions: {debuggerAddress: localhost:57684}, goog:processID: 6512, networkConnectionEnabled: false, pageLoadStrategy: normal, platformName: windows, proxy: Proxy(), se:cdp: ws://localhost:57684/devtoo..., se:cdpVersion: 143.0.7499.170, setWindowRect: true, strictFileInteractability: false, timeouts: {implicit: 0, pageLoad: 300000, script: 30000}, unhandledPromptBehavior: dismiss and notify, webauthn:extension:credBlob: true, webauthn:extension:largeBlob: true, webauthn:extension:minPinLength: true, webauthn:extension:prf: true, webauthn:virtualAuthenticators: true}
+Element: [[ChromeDriver: chrome on windows (d29f380cf25f6585cf145d8e6643d1f2)] -> xpath: //input[contains(@class,'qty')]]
+Session ID: d29f380cf25f6585cf145d8e6643d1f2]]>
+            </message>
+            <full-stacktrace>
+              <![CDATA[org.openqa.selenium.StaleElementReferenceException: stale element reference: stale element not found in the current frame
+  (Session info: chrome=143.0.7499.170)
+For documentation on this error, please visit: https://www.selenium.dev/documentation/webdriver/troubleshooting/errors#stale-element-reference-exception
+Build info: version: '4.25.0', revision: '8a8aea2337'
+System info: os.name: 'Windows 11', os.arch: 'amd64', os.version: '10.0', java.version: '17.0.7'
+Driver info: org.openqa.selenium.chrome.ChromeDriver
+Command: [d29f380cf25f6585cf145d8e6643d1f2, getElementAttribute {id=f.FDDCB723DDA22AE8D4C537494E52E123.d.078F0FC2744C5059746AEC9B5E43BF8F.e.301, name=value}]
+Capabilities {acceptInsecureCerts: false, browserName: chrome, browserVersion: 143.0.7499.170, chrome: {chromedriverVersion: 143.0.7499.192 (be2c1f4fd45..., userDataDir: C:\Users\LYXELA~1\AppData\L...}, fedcm:accounts: true, goog:chromeOptions: {debuggerAddress: localhost:57684}, goog:processID: 6512, networkConnectionEnabled: false, pageLoadStrategy: normal, platformName: windows, proxy: Proxy(), se:cdp: ws://localhost:57684/devtoo..., se:cdpVersion: 143.0.7499.170, setWindowRect: true, strictFileInteractability: false, timeouts: {implicit: 0, pageLoad: 300000, script: 30000}, unhandledPromptBehavior: dismiss and notify, webauthn:extension:credBlob: true, webauthn:extension:largeBlob: true, webauthn:extension:minPinLength: true, webauthn:extension:prf: true, webauthn:virtualAuthenticators: true}
+Element: [[ChromeDriver: chrome on windows (d29f380cf25f6585cf145d8e6643d1f2)] -> xpath: //input[contains(@class,'qty')]]
+Session ID: d29f380cf25f6585cf145d8e6643d1f2
+at java.base/jdk.internal.reflect.NativeConstructorAccessorImpl.newInstance0(Native Method)
+at java.base/jdk.internal.reflect.NativeConstructorAccessorImpl.newInstance(NativeConstructorAccessorImpl.java:77)
+at java.base/jdk.internal.reflect.DelegatingConstructorAccessorImpl.newInstance(DelegatingConstructorAccessorImpl.java:45)
+at java.base/java.lang.reflect.Constructor.newInstanceWithCaller(Constructor.java:499)
+at java.base/java.lang.reflect.Constructor.newInstance(Constructor.java:480)
+at org.openqa.selenium.remote.ErrorCodec.decode(ErrorCodec.java:167)
+at org.openqa.selenium.remote.codec.w3c.W3CHttpResponseCodec.decode(W3CHttpResponseCodec.java:138)
+at org.openqa.selenium.remote.codec.w3c.W3CHttpResponseCodec.decode(W3CHttpResponseCodec.java:50)
+at org.openqa.selenium.remote.HttpCommandExecutor.execute(HttpCommandExecutor.java:190)
+at org.openqa.selenium.remote.service.DriverCommandExecutor.invokeExecute(DriverCommandExecutor.java:216)
+at org.openqa.selenium.remote.service.DriverCommandExecutor.execute(DriverCommandExecutor.java:174)
+at org.openqa.selenium.remote.RemoteWebDriver.execute(RemoteWebDriver.java:545)
+at org.openqa.selenium.remote.RemoteWebElement.execute(RemoteWebElement.java:223)
+at org.openqa.selenium.remote.RemoteWebElement.getAttribute(RemoteWebElement.java:149)
+at Pages.MiniCartPage.decreaseQuantity(MiniCartPage.java:63)
+at TestPages.MiniCartTest.TC_02_QuantityDecrease(MiniCartTest.java:48)
+at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:77)
+at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+at java.base/java.lang.reflect.Method.invoke(Method.java:568)
+at org.testng.internal.invokers.MethodInvocationHelper.invokeMethod(MethodInvocationHelper.java:139)
+at org.testng.internal.invokers.TestInvoker.invokeMethod(TestInvoker.java:677)
+at org.testng.internal.invokers.TestInvoker.invokeTestMethod(TestInvoker.java:221)
+at org.testng.internal.invokers.MethodRunner.runInSequence(MethodRunner.java:50)
+at org.testng.internal.invokers.TestInvoker$MethodInvocationAgent.invoke(TestInvoker.java:969)
+at org.testng.internal.invokers.TestInvoker.invokeTestMethods(TestInvoker.java:194)
+at org.testng.internal.invokers.TestMethodWorker.invokeTestMethods(TestMethodWorker.java:148)
+at org.testng.internal.invokers.TestMethodWorker.run(TestMethodWorker.java:128)
+at java.base/java.util.ArrayList.forEach(ArrayList.java:1511)
+at org.testng.TestRunner.privateRun(TestRunner.java:829)
+at org.testng.TestRunner.run(TestRunner.java:602)
+at org.testng.SuiteRunner.runTest(SuiteRunner.java:437)
+at org.testng.SuiteRunner.runSequentially(SuiteRunner.java:431)
+at org.testng.SuiteRunner.privateRun(SuiteRunner.java:391)
+at org.testng.SuiteRunner.run(SuiteRunner.java:330)
+at org.testng.SuiteRunnerWorker.runSuite(SuiteRunnerWorker.java:52)
+at org.testng.SuiteRunnerWorker.run(SuiteRunnerWorker.java:95)
+at org.testng.TestNG.runSuitesSequentially(TestNG.java:1256)
+at org.testng.TestNG.runSuitesLocally(TestNG.java:1176)
+at org.testng.TestNG.runSuites(TestNG.java:1099)
+at org.testng.TestNG.run(TestNG.java:1067)
+at org.testng.remote.AbstractRemoteTestNG.run(AbstractRemoteTestNG.java:115)
+at org.testng.remote.RemoteTestNG.initAndRun(RemoteTestNG.java:251)
+at org.testng.remote.RemoteTestNG.main(RemoteTestNG.java:77)
+]]>
+            </full-stacktrace>
+          </exception> <!-- org.openqa.selenium.StaleElementReferenceException -->
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- TC_02_QuantityDecrease -->
+        <test-method signature="TC_03_EnterPincode()[pri:3, instance:TestPages.MiniCartTest@8462f31]" started-at="2026-01-07T17:41:33 IST" name="TC_03_EnterPincode" finished-at="2026-01-07T17:41:33 IST" duration-ms="195" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- TC_03_EnterPincode -->
+        <test-method signature="TC_04_ClickOnCheckout()[pri:4, instance:TestPages.MiniCartTest@8462f31]" started-at="2026-01-07T17:41:33 IST" name="TC_04_ClickOnCheckout" finished-at="2026-01-07T17:41:38 IST" duration-ms="5283" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- TC_04_ClickOnCheckout -->
+      </class> <!-- TestPages.MiniCartTest -->
+    </test> <!-- iniCartTest -->
+  </suite> <!-- Suite -->
+</testng-results>
