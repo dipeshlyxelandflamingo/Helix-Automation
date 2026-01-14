@@ -12,7 +12,7 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.openqa.selenium.WebDriver;
 
-public class Homepage {
+public class HomePage {
 
 	JavascriptExecutor js;
 	WebDriverWait wait;
@@ -20,7 +20,7 @@ public class Homepage {
 	Actions act;
 
 	// Constructor
-	public Homepage(WebDriver driver) {
+	public HomePage(WebDriver driver) {
 		this.driver = driver;
 		this.wait = new WebDriverWait(driver, Duration.ofSeconds(15));
 		this.js = (JavascriptExecutor) driver;
@@ -29,7 +29,7 @@ public class Homepage {
 
 	// TC_01
 
-	public void clickmenbestsellerShopNowAndCloseTab() throws Throwable {
+	public void clickmenbestsellerShopNowAndCloseTab() {
 
 		js.executeScript("window.scrollBy(0,1000)");
 
@@ -55,7 +55,12 @@ public class Homepage {
 		// Simple wait (page is usable)
 		wait.until(ExpectedConditions.presenceOfElementLocated(By.tagName("body")));
 		// EXTRA 2 seconds wait (as required)
-		Thread.sleep(1000);
+		try {
+			Thread.sleep(1000);
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 
 		// Close child tab and switch back
 		driver.close();
@@ -64,7 +69,7 @@ public class Homepage {
 
 	// TC_02
 
-	public void clickwomenbestsellerShopNowAndCloseTab() throws Throwable {
+	public void clickwomenbestsellerShopNowAndCloseTab() {
 
 //		js.executeScript("window.scrollBy(0,1000)");
 
@@ -90,7 +95,12 @@ public class Homepage {
 		// Simple wait (page is usable)
 		wait.until(ExpectedConditions.presenceOfElementLocated(By.tagName("body")));
 		// EXTRA 2 seconds wait
-		Thread.sleep(1000);
+		try {
+			Thread.sleep(1000);
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 
 		// Close child tab and switch back
 		driver.close();
@@ -99,7 +109,7 @@ public class Homepage {
 
 //TC_03
 
-	public void clickLatestReleaseProductLPFCTAAndCloseTab() throws Throwable {
+	public void clickLatestReleaseProductLPFCTAAndCloseTab() {
 
 		js.executeScript("window.scrollBy(0,2000)");
 
@@ -124,7 +134,12 @@ public class Homepage {
 		// Simple wait (page is usable)
 		wait.until(ExpectedConditions.presenceOfElementLocated(By.tagName("body")));
 		// EXTRA 2 seconds wait
-		Thread.sleep(1000);
+		try {
+			Thread.sleep(1000);
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 
 		// Close child tab and switch back
 		driver.close();
@@ -133,7 +148,7 @@ public class Homepage {
 
 	// TC_04
 
-	public void clickOnAllProductsLatestReleaseAndCloseTab() throws Throwable {
+	public void clickOnAllProductsLatestReleaseAndCloseTab() {
 
 //		js.executeScript("window.scrollBy(0,2000)");
 
@@ -153,7 +168,12 @@ public class Homepage {
 
 			// Scroll element into view
 			js.executeScript("arguments[0].scrollIntoView({block:'center'});", LMCTAP);
-			Thread.sleep(500);
+			try {
+				Thread.sleep(500);
+			} catch (InterruptedException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 
 			// Open in new tab
 			act.keyDown(Keys.CONTROL).click(LMCTAP).keyUp(Keys.CONTROL).perform();
@@ -171,7 +191,12 @@ public class Homepage {
 
 			// Page usable wait
 			wait.until(ExpectedConditions.presenceOfElementLocated(By.tagName("body")));
-			Thread.sleep(1000);
+			try {
+				Thread.sleep(1000);
+			} catch (InterruptedException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 
 			// Close child tab and go back
 			driver.close();
@@ -182,7 +207,7 @@ public class Homepage {
 	}
 	// TC_05
 
-	public void clickOnAllPCAndCloseTab() throws Throwable {
+	public void clickOnAllPCAndCloseTab() {
 
 //		js.executeScript("window.scrollBy(0,2000)");
 
@@ -205,7 +230,12 @@ public class Homepage {
 
 			// Scroll element into view
 			js.executeScript("arguments[0].scrollIntoView({block:'center'});", PCAT);
-			Thread.sleep(500);
+			try {
+				Thread.sleep(500);
+			} catch (InterruptedException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 
 			// Open in new tab
 			act.keyDown(Keys.CONTROL).click(PCAT).keyUp(Keys.CONTROL).perform();
@@ -223,7 +253,12 @@ public class Homepage {
 
 			// Page usable wait
 			wait.until(ExpectedConditions.presenceOfElementLocated(By.tagName("body")));
-			Thread.sleep(1000);
+			try {
+				Thread.sleep(1000);
+			} catch (InterruptedException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 
 			// Close child tab and go back
 			driver.close();
@@ -234,7 +269,7 @@ public class Homepage {
 
 	// TC_06
 
-	public void clickTGPBannerAndCloseTab() throws Throwable {
+	public void clickTGPBannerAndCloseTab() {
 
 		js.executeScript("window.scrollBy(0,4500)");
 
@@ -260,7 +295,12 @@ public class Homepage {
 		// Simple wait (page is usable)
 		wait.until(ExpectedConditions.presenceOfElementLocated(By.tagName("body")));
 		// EXTRA 2 seconds wait
-		Thread.sleep(1000);
+		try {
+			Thread.sleep(1000);
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 
 		// Close child tab and switch back
 		driver.close();
@@ -270,7 +310,7 @@ public class Homepage {
 
 	// TC_07
 
-	public void clickLSBShopNowCTAAndCloseTab() throws Throwable {
+	public void clickLSBShopNowCTAAndCloseTab() {
 
 		js.executeScript("window.scrollBy(0,6000)");
 
@@ -296,7 +336,12 @@ public class Homepage {
 		// Simple wait (page is usable)
 		wait.until(ExpectedConditions.presenceOfElementLocated(By.tagName("body")));
 		// EXTRA 2 seconds wait
-		Thread.sleep(1000);
+		try {
+			Thread.sleep(1000);
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 
 		// Close child tab and switch back
 		driver.close();
@@ -305,15 +350,28 @@ public class Homepage {
 	}
 
 	// TC_08
-	public void goToNewCategory() throws Exception {
-		
+	public void goToNewCategory() {
+
 		js.executeScript("window.scrollTo(0,0)");
-		Thread.sleep(2000);
-		WebElement watchesTab = wait
-				.until(ExpectedConditions.elementToBeClickable(By.xpath("//a[@id='new']")));
-		watchesTab.click();		
-		Thread.sleep(1000);
-		
+		try {
+			Thread.sleep(2000);
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+
+		WebElement watchesTab = wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//a[@id='new']")));
+		act.moveToElement(watchesTab).perform();
+		try {
+			Thread.sleep(1000);
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		WebElement MensnewArrival = wait.until(
+				ExpectedConditions.elementToBeClickable(By.xpath("(//a[@href='/collections/mens-new-arrivals'])[1]")));
+		MensnewArrival.click();
+
 	}
 
 }

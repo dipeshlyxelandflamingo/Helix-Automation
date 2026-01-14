@@ -26,7 +26,7 @@ public class PDPPage {
 		this.act = new Actions(driver);
 	}
 
-	public void clickRecommondedProducts() throws Exception {
+	public void clickRecommondedProducts() {
 
 		js.executeScript("window.scrollBy(0,2900)");
 
@@ -37,7 +37,12 @@ public class PDPPage {
 			String parent = driver.getWindowHandle();
 
 			act.keyDown(Keys.CONTROL).click(product).keyUp(Keys.CONTROL).perform();
-			Thread.sleep(1000);
+			try {
+				Thread.sleep(1000);
+			} catch (InterruptedException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 			for (String tab : driver.getWindowHandles()) {
 				if (!tab.equals(parent)) {
 					driver.switchTo().window(tab);
@@ -51,8 +56,6 @@ public class PDPPage {
 
 	}
 
-	
-
 	public void ClickAddToCart() {
 		try {
 			Thread.sleep(2000);
@@ -61,8 +64,8 @@ public class PDPPage {
 			e.printStackTrace();
 		}
 		js.executeScript("window.scrollBy(0,900)");
-		WebElement AddToCart = wait
-				.until(ExpectedConditions.elementToBeClickable(By.xpath("//button[@class='button button--action product-details__sticky-atc-add-btn']")));
+		WebElement AddToCart = wait.until(ExpectedConditions.elementToBeClickable(
+				By.xpath("//button[@class='button button--action product-details__sticky-atc-add-btn']")));
 		AddToCart.click();
 	}
 

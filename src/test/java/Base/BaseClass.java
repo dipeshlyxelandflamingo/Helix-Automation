@@ -48,7 +48,7 @@ public class BaseClass {
 		driver.manage().window().maximize();
 		driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(5));
 
-		driver.get("https://helix-watches.com/collections/mens-new-arrivals?usf_sort=bestselling");
+		driver.get("https://helix-watches.com");
 
 		wait = new WebDriverWait(driver, Duration.ofSeconds(15));
 		js = (JavascriptExecutor) driver;
@@ -56,7 +56,7 @@ public class BaseClass {
 
 	}
 
-	//@AfterClass
+	@AfterClass
 	public void tearDownClass() {
 		if (driver != null) {
 			driver.quit();

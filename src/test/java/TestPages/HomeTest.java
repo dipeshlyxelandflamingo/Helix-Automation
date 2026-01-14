@@ -1,115 +1,90 @@
 package TestPages;
 
+import org.testng.Assert;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 
 import Base.BaseClass;
-import Pages.Homepage;
+import Pages.HomePage;
 
 public class HomeTest extends BaseClass {
 
-	Homepage home;
+	HomePage home;
 
 	@BeforeClass
 	public void setUpHomePage() {
-		home = new Homepage(driver);
+		home = new HomePage(driver);
 	}
 
 	@Test(priority = 1)
-	public void clickOnMenBestSeller() {
+    public void clickOnMenBestSellerShopNowButton() {
+        try {
+            home.clickmenbestsellerShopNowAndCloseTab();
+        } catch (Exception e) {
+            Assert.fail("Failed to Click on Men BestSeller ShopNow Button");
+        }
+    }
 
-		try {
-			home.clickmenbestsellerShopNowAndCloseTab();
-		} catch (Throwable e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+    @Test(priority = 2)
+    public void clickOnWomenBestSellerShopnowButton() {
+        try {
+            home.clickwomenbestsellerShopNowAndCloseTab();
+        } catch (Exception e) {
+            Assert.fail("Failed to Click on Women BestSeller ShopNow Button");
+        }
+    }
 
-	}
+    @Test(priority = 3)
+    public void clickLatestReleaseProduct() {
+        try {
+            home.clickLatestReleaseProductLPFCTAAndCloseTab();
+        } catch (Exception e) {
+            Assert.fail("Failed to Click on Latest Release Product");
+        }
+    }
 
-	@Test(priority = 2)
-	public void clickOnWomenBestSeller() {
+    @Test(priority = 4)
+    public void clickOnAllProductsLatestRelease() {
+        try {
+            home.clickOnAllProductsLatestReleaseAndCloseTab();
+        } catch (Exception e) {
+            Assert.fail("Failed to Click on All Products Latest Release");
+        }
+    }
 
-		try {
-			home.clickwomenbestsellerShopNowAndCloseTab();
-		} catch (Throwable e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+    @Test(priority = 5)
+    public void clickOnAllLowStockProductCategories() {
+        try {
+            home.clickOnAllPCAndCloseTab();
+        } catch (Exception e) {
+            Assert.fail("Failed to Click on All Low Stock Product Categories");
+        }
+    }
 
-	}
+    @Test(priority = 6)
+    public void ClickOnPopularCategories() {
+        try {
+            home.clickTGPBannerAndCloseTab();
+        } catch (Exception e) {
+            Assert.fail("Failed to Click on Popular Categories List");
+        }
+    }
 
-	@Test(priority = 3)
-	public void clickLatestReleaseProduct() {
+    @Test(priority = 7)
+    public void clickOnLeatherWatchMenShopNowButton() {
+        try {
+            home.clickLSBShopNowCTAAndCloseTab();
+        } catch (Exception e) {
+            Assert.fail("Failed to Click On Leather Watch Men ShopNow Button");
+        }
+    }
 
-		try {
-			home.clickLatestReleaseProductLPFCTAAndCloseTab();
-		} catch (Throwable e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-
-	}
-
-
-	@Test(priority = 4)
-	public void clickOnAllProductsLatestReleaseAndCloseTab() {
-
-		try {
-			home.clickOnAllProductsLatestReleaseAndCloseTab();
-		} catch (Throwable e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-
-	}
-	
-	@Test(priority = 5)
-	public void clickOnAllPCAndCloseTab() {
-
-		try {
-			home.clickOnAllPCAndCloseTab();
-		} catch (Throwable e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-
-	}
-	
-	@Test(priority = 6)
-	public void clickTGPBannerAndCloseTab() {
-
-		try {
-			home.clickTGPBannerAndCloseTab();
-		} catch (Throwable e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-
-	}
-	
-	@Test(priority = 7)
-	public void clickLSBShopNowCTAAndCloseTab() {
-
-		try {
-			home.clickLSBShopNowCTAAndCloseTab();
-		} catch (Throwable e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-
-	}
-	
-	@Test(priority = 8)
-	public void goToNewCategory() {
-
-		try {
-			home.goToNewCategory();
-		} catch (Throwable e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-
-	}
-
+    @Test(priority = 8)
+    public void GoToMensNewArrivalCategory() {
+        try {
+            home.goToNewCategory();
+        } catch (Exception e) {
+            Assert.fail("Failed to Click on Mens New Arrival Category");
+        }
+    }
 }

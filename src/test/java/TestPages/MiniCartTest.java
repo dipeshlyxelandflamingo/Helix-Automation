@@ -1,5 +1,6 @@
 package TestPages;
 
+import org.testng.Assert;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 
@@ -11,7 +12,7 @@ import Pages.PLPPage;
 
 public class MiniCartTest extends BaseClass {
 
-	// HomePage home;
+	HomePage home;
 	PLPPage plp;
 	PDPPage pdp;
 	MiniCartPage miniCart;
@@ -20,11 +21,11 @@ public class MiniCartTest extends BaseClass {
 	public void initFlow() {
 
 		// Navigate to category
-		// home = new HomePage(driver);
-		// home.goToWatchesCategory();
+		home = new HomePage(driver);
+		home.goToNewCategory();
 
 		// Select a product from PLP
-		 plp = new PLPPage(driver);
+		plp = new PLPPage(driver);
 		plp.clickFirstProduct();
 
 		// Add product to cart from PDP
@@ -36,29 +37,38 @@ public class MiniCartTest extends BaseClass {
 	}
 
 	@Test(priority = 1)
-	public void TC_01_QuantityIncrease() throws Exception {
-
-		miniCart.increaseQuantity();
-
+	public void TC_01_QuantityIncrease() {
+		try {
+			miniCart.increaseQuantity();
+		} catch (Exception e) {
+			Assert.fail("Failed to Increase Quantity On Product");
+		}
 	}
-	
+
 	@Test(priority = 2)
-	public void TC_02_QuantityDecrease() throws Exception {
-
-		miniCart.decreaseQuantity();
+	public void TC_02_QuantityDecrease() {
+		try {
+			miniCart.decreaseQuantity();
+		} catch (Exception e) {
+			Assert.fail("Failed to Decrease Quantity On Product");
+		}
 	}
-	
+
 	@Test(priority = 3)
-	public void TC_03_EnterPincode() throws Exception {
-
-		miniCart.enterPincode("201306");
+	public void TC_03_EnterPincode() {
+		try {
+			miniCart.enterPincode("201306");
+		} catch (Exception e) {
+			Assert.fail("Failed to Enter Pincode");
+		}
 	}
-	
+
 	@Test(priority = 4)
-	public void TC_04_ClickOnCheckout() throws Exception {
-
-		miniCart.goToQuickCheckout();
+	public void TC_04_ClickOnCheckoutButton() {
+		try {
+			miniCart.goToQuickCheckout();
+		} catch (Exception e) {
+			Assert.fail("Failed to Click On Checkout Button");
+		}
 	}
-	
-
 }

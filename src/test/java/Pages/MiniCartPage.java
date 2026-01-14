@@ -27,7 +27,7 @@ public class MiniCartPage {
 	}
 
 	// ---------- Quantity Increase ----------
-	public void increaseQuantity() throws Exception {
+	public void increaseQuantity() {
 
 		for (int i = 1; i <= 3; i++) {
 
@@ -35,7 +35,12 @@ public class MiniCartPage {
 					.until(ExpectedConditions.elementToBeClickable(By.xpath("//button[contains(@class,'qty-plus')]")));
 
 			qtyPlusBtn.click();
-			Thread.sleep(1000);
+			try {
+				Thread.sleep(1000);
+			} catch (InterruptedException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 		}
 
 		// NOW read quantity from INPUT
@@ -47,18 +52,23 @@ public class MiniCartPage {
 		Assert.assertEquals(actualQty, "4", "Quantity is NOT 4");
 	}
 
-	
-	
-	public void decreaseQuantity() throws Exception {
+	public void decreaseQuantity() {
 
 		for (int i = 1; i <= 3; i++) {
 
-			WebElement qtyMinusBtn = wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//button[@class='qty-minus']")));
+			WebElement qtyMinusBtn = wait
+					.until(ExpectedConditions.elementToBeClickable(By.xpath("//button[@class='qty-minus']")));
 
 			qtyMinusBtn.click();
-			Thread.sleep(1000);
-		}		
-		WebElement qtyInput = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//input[contains(@class,'qty')]")));
+			try {
+				Thread.sleep(1000);
+			} catch (InterruptedException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
+		WebElement qtyInput = wait
+				.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//input[contains(@class,'qty')]")));
 
 		String actualQty = qtyInput.getAttribute("value");
 
@@ -66,7 +76,6 @@ public class MiniCartPage {
 
 	}
 
-	
 	public void enterPincode(String pincode) {
 		WebElement pincodeInput = wait.until(ExpectedConditions.elementToBeClickable(By.id("userPincode")));
 		pincodeInput.clear();

@@ -2,15 +2,15 @@ package Pages;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
+import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
-import org.testng.annotations.Test;
 
 public class Checkout {
-	
+
 	WebDriver driver;
 	WebDriverWait wait;
 	JavascriptExecutor js;
@@ -20,57 +20,62 @@ public class Checkout {
 		this.wait = wait;
 		this.js = (JavascriptExecutor) driver;
 	}
-	
-	@Test(priority = 1)
-	public void verifyCheckoutPage() {
 
-	    WebElement contactTitle = wait.until(ExpectedConditions.visibilityOfElementLocated(
-	            By.xpath("//h2[@id='deliveryAddress']")
-	    ));
+	public boolean verifyCheckoutPage() {
 
-	    Assert.assertTrue(contactTitle.isDisplayed(), "Checkout page not opened");
+		WebElement contactTitle = wait
+				.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//h2[@id='deliveryAddress']")));
+
+		return contactTitle.isDisplayed();
 	}
-	
-	@Test(priority = 2)
+
 	public void fillCheckoutForm() throws Exception {
 
-	    wait.until(ExpectedConditions.elementToBeClickable(By.id("email")))
-	            .sendKeys("automationtest3j@gmail.com");
+		wait.until(ExpectedConditions.elementToBeClickable(By.id("email"))).sendKeys("automationtest3j@gmail.com");
 
-	    driver.findElement(By.name("firstName")).sendKeys("Test");
-	    driver.findElement(By.name("lastName")).sendKeys("Singh");
-	    driver.findElement(By.name("company")).sendKeys("L&F");
-	    driver.findElement(By.name("address1")).sendKeys("Test");
-	    driver.findElement(By.name("address2")).sendKeys("Test");
-	    driver.findElement(By.name("city")).sendKeys("Ghaziabad");
-	    driver.findElement(By.name("postalCode")).sendKeys("201010");
-	    driver.findElement(By.name("phone")).sendKeys("9876543210");
+		// name
+		WebElement fname = wait.until(ExpectedConditions.visibilityOfElementLocated(By.name("firstName")));
+		fname.sendKeys("Test");
+
+		// last name
+		WebElement lname = wait.until(ExpectedConditions.visibilityOfElementLocated(By.name("lastName")));
+		lname.sendKeys("Singh");
+
+		// address by dropdown
+		WebElement Add1 = wait.until(ExpectedConditions.visibilityOfElementLocated(By.name("address1")));
+		Add1.sendKeys("Noida city center Sector 39");
+		Thread.sleep(3000);
+
+		// first suggestion select
+		Add1.sendKeys(Keys.ARROW_DOWN);
+		Thread.sleep(2000);
+		Add1.sendKeys(Keys.ENTER);
+
+		WebElement city = wait.until(ExpectedConditions.visibilityOfElementLocated(By.name("city")));
+		city.sendKeys("Noida");
+		Thread.sleep(1000);
+
+		WebElement pincode = wait.until(ExpectedConditions.visibilityOfElementLocated(By.name("postalCode")));
+		pincode.clear();
+		pincode.sendKeys("201303");
+
+		WebElement mobile = wait
+				.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//input[@name='phone']")));
+		mobile.sendKeys("9876543210");
 
 	}
-	
-	@Test(priority = 3)
+
 	public void clickPayNow() throws Exception {
+		Thread.sleep(3000);
+		// Scroll to bottom
+		js.executeScript("window.scrollTo(0, document.body.scrollHeight)");
+		Thread.sleep(1500);
 
-	    // Scroll to bottom
-	    js.executeScript("window.scrollTo(0, document.body.scrollHeight)");
-	    Thread.sleep(1500);
+		WebElement payNow = wait
+				.until(ExpectedConditions.elementToBeClickable(By.xpath("//button[@id='checkout-pay-button']")));
 
-	    // Shopify Pay Now iframe
-	    WebElement iframe = wait.until(ExpectedConditions.presenceOfElementLocated(
-	            By.xpath("//iframe[contains(@title,'Checkout')]")
-	    ));
-	    driver.switchTo().frame(iframe);
-
-	    WebElement payNow = wait.until(ExpectedConditions.elementToBeClickable(
-	            By.xpath("//button[contains(.,'Pay now')]")
-	    ));
-
-	    js.executeScript("arguments[0].click();", payNow);
-
-	    driver.switchTo().defaultContent();
+		js.executeScript("arguments[0].click();", payNow);
+		payNow.click();
 	}
-
-
-
 
 }
