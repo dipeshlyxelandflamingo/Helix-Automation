@@ -3,63 +3,14 @@
 <suite name="Failed suite [Suite]" guice-stage="DEVELOPMENT">
   <test thread-count="5" name="Test(failed)">
     <classes>
-      <class name="TestPages.CheckoutTest">
-        <methods>
-          <include name="TC_01_verifyCheckoutPage"/>
-          <include name="TC_03_clickPayNow"/>
-          <include name="setUpClass"/>
-          <include name="TC_02_fillCheckoutForm"/>
-          <include name="initFlow"/>
-          <include name="tearDownClass"/>
-        </methods>
-      </class> <!-- TestPages.CheckoutTest -->
       <class name="TestPages.HomeTest">
         <methods>
           <include name="setUpHomePage"/>
           <include name="ClickOnPopularCategories"/>
           <include name="setUpClass"/>
-          <include name="clickOnAllProductsLatestRelease"/>
-          <include name="clickOnLeatherWatchMenShopNowButton"/>
-          <include name="clickOnAllLowStockProductCategories"/>
-          <include name="clickOnWomenBestSellerShopnowButton"/>
-          <include name="clickLatestReleaseProduct"/>
-          <include name="clickOnMenBestSellerShopNowButton"/>
           <include name="tearDownClass"/>
-          <include name="GoToMensNewArrivalCategory"/>
         </methods>
       </class> <!-- TestPages.HomeTest -->
-      <class name="TestPages.MiniCartTest">
-        <methods>
-          <include name="TC_02_QuantityDecrease"/>
-          <include name="setUpClass"/>
-          <include name="TC_04_ClickOnCheckoutButton"/>
-          <include name="TC_03_EnterPincode"/>
-          <include name="TC_01_QuantityIncrease"/>
-          <include name="tearDownClass"/>
-          <include name="initFlow"/>
-        </methods>
-      </class> <!-- TestPages.MiniCartTest -->
-      <class name="TestPages.PDPTest">
-        <methods>
-          <include name="setUpClass"/>
-          <include name="init"/>
-          <include name="TC_01_clickOnRecommondedProductsList"/>
-          <include name="tearDownClass"/>
-          <include name="TC_02_AddProductInCart"/>
-        </methods>
-      </class> <!-- TestPages.PDPTest -->
-      <class name="TestPages.PLPTest">
-        <methods>
-          <include name="TC_03_ClickOnDialColorFilter"/>
-          <include name="setUpClass"/>
-          <include name="TC_04_ClickOnStrapColorFilter"/>
-          <include name="init"/>
-          <include name="TC_05_ClickOnFirstProduct"/>
-          <include name="TC_02_ClickOnAttachmentTypeFilter"/>
-          <include name="TC_01_ClickOnDialShapeFilter"/>
-          <include name="tearDownClass"/>
-        </methods>
-      </class> <!-- TestPages.PLPTest -->
     </classes>
   </test> <!-- Test(failed) -->
 </suite> <!-- Failed suite [Suite] -->

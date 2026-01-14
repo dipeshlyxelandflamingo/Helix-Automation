@@ -69,4 +69,13 @@ public class CheckoutTest extends BaseClass {
 			Assert.fail("Failed to click on Pay Now button");
 		}
 	}
+
+	@Test(priority = 4, description = "Verify Secure Checkout section is visible and enabled")
+	public void VerifyCheckoutEnable() {
+		// Checkout page object
+		Checkout checkout = new Checkout(driver, wait);
+
+		// Hard assert: agar false → test FAIL ho jaaye
+		Assert.assertTrue(checkout.checkoutVerify(), "Secure Checkout is not visible or not enabled");
+	}
 }

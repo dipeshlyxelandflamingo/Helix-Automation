@@ -78,4 +78,20 @@ public class Checkout {
 		payNow.click();
 	}
 
+	public boolean checkoutVerify() {
+		try {
+			// Thoda zyada wait rakha 15 sec for payment page load
+			WebDriverWait longWait = new WebDriverWait(driver, java.time.Duration.ofSeconds(15));
+
+			WebElement secureCheckout = longWait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath(
+					"//div[contains(@class,'sidebarFooter__secureCheckout') and .//p[text()='Secure Checkout']]")));
+
+			// Return true if visible and enabled
+			return secureCheckout.isDisplayed() && secureCheckout.isEnabled();
+
+		} catch (Exception e) {
+			// Agar element nahi mila ya exception aaya → return false
+			return false;
+		}
+	}
 }
