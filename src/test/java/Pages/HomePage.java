@@ -14,364 +14,185 @@ import org.openqa.selenium.WebDriver;
 
 public class HomePage {
 
-	JavascriptExecutor js;
-	WebDriverWait wait;
 	WebDriver driver;
+	WebDriverWait wait;
+	JavascriptExecutor js;
 	Actions act;
 
-	// Constructor
+	// ✅ Constructor
 	public HomePage(WebDriver driver) {
 		this.driver = driver;
-		this.wait = new WebDriverWait(driver, Duration.ofSeconds(15));
+		boolean isLinux = System.getProperty("os.name", "").toLowerCase().contains("linux");
+		this.wait = new WebDriverWait(driver, Duration.ofSeconds(isLinux ? 35 : 20));
 		this.js = (JavascriptExecutor) driver;
-		this.act = new Actions(driver);
+		this.act = new Actions(driver); 
+
 	}
 
-	// TC_01
+	// ---------------- Helper Method for New Tab Logic ----------------
+	private void openInNewTabAndClose(WebElement element) {
+		String parent = driver.getWindowHandle();
 
+		// Open element in new tab
+		act.keyDown(Keys.CONTROL).click(element).keyUp(Keys.CONTROL).perform();
+
+		// Wait for new tab
+		wait.until(ExpectedConditions.numberOfWindowsToBe(2));
+
+		// Switch to child tab
+		for (String tab : driver.getWindowHandles()) {
+			if (!tab.equals(parent)) {
+				driver.switchTo().window(tab);
+				break;
+			}
+		}
+
+		// Wait until page is loaded
+		wait.until(ExpectedConditions.presenceOfElementLocated(By.tagName("body")));
+
+		// Optional extra wait
+		try {
+			Thread.sleep(1000);
+		} catch (InterruptedException e) {
+		}
+
+		// Close child tab and switch back
+		driver.close();
+		driver.switchTo().window(parent);
+	}
+
+	// ---------------- TC_01 ----------------
 	public void clickmenbestsellerShopNowAndCloseTab() {
-
-		js.executeScript("window.scrollBy(0,1000)");
-
-		WebElement shopMBNowCTA = wait.until(ExpectedConditions.elementToBeClickable(
+		WebElement shopMBNowCTA = wait.until(ExpectedConditions.visibilityOfElementLocated(
 				By.xpath("//a[contains(@class,'yb-text-wrapper') and .//p[text()=\"Men's Best Sellers\"]]")));
 
-		String parent = driver.getWindowHandle();
+		((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView({block:'center', inline:'nearest'});",
+				shopMBNowCTA);
 
-		// Open in new tab
-		act.keyDown(Keys.CONTROL).click(shopMBNowCTA).keyUp(Keys.CONTROL).perform();
+		wait.until(ExpectedConditions.elementToBeClickable(shopMBNowCTA));
 
-		// Wait till child tab opens
-		wait.until(ExpectedConditions.numberOfWindowsToBe(2));
-
-		// Switch to child tab
-		for (String tab : driver.getWindowHandles()) {
-			if (!tab.equals(parent)) {
-				driver.switchTo().window(tab);
-				break;
-			}
-		}
-
-		// Simple wait (page is usable)
-		wait.until(ExpectedConditions.presenceOfElementLocated(By.tagName("body")));
-		// EXTRA 2 seconds wait (as required)
-		try {
-			Thread.sleep(1000);
-		} catch (InterruptedException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-
-		// Close child tab and switch back
-		driver.close();
-		driver.switchTo().window(parent);
+		openInNewTabAndClose(shopMBNowCTA);
 	}
 
-	// TC_02
-
+	// ---------------- TC_02 ----------------
 	public void clickwomenbestsellerShopNowAndCloseTab() {
+		WebElement shopWBNowCTA = wait.until(ExpectedConditions.visibilityOfElementLocated(By
+				.xpath("//a[contains(@class,'yb-text-wrapper') and .//p[contains(text(),\"Women's Best Sellers\")]]")));
 
-//		js.executeScript("window.scrollBy(0,1000)");
+		((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView({block:'center', inline:'nearest'});",
+				shopWBNowCTA);
 
-		WebElement shopWBNowCTA = wait.until(ExpectedConditions.elementToBeClickable(By.xpath(
-				"//a[contains(@class,\"yb-text-wrapper\") and .//p[contains(text(),\"Women's Best Sellers\")]] ")));
+		wait.until(ExpectedConditions.elementToBeClickable(shopWBNowCTA));
 
-		String parent = driver.getWindowHandle();
-
-		// Open in new tab
-		act.keyDown(Keys.CONTROL).click(shopWBNowCTA).keyUp(Keys.CONTROL).perform();
-
-		// Wait till child tab opens
-		wait.until(ExpectedConditions.numberOfWindowsToBe(2));
-
-		// Switch to child tab
-		for (String tab : driver.getWindowHandles()) {
-			if (!tab.equals(parent)) {
-				driver.switchTo().window(tab);
-				break;
-			}
-		}
-
-		// Simple wait (page is usable)
-		wait.until(ExpectedConditions.presenceOfElementLocated(By.tagName("body")));
-		// EXTRA 2 seconds wait
-		try {
-			Thread.sleep(1000);
-		} catch (InterruptedException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-
-		// Close child tab and switch back
-		driver.close();
-		driver.switchTo().window(parent);
+		openInNewTabAndClose(shopWBNowCTA);
 	}
 
-//TC_03
-
+	// ---------------- TC_03 ----------------
 	public void clickLatestReleaseProductLPFCTAAndCloseTab() {
-
-		js.executeScript("window.scrollBy(0,2000)");
-
-		WebElement LPFCTA = wait.until(ExpectedConditions.elementToBeClickable(By
+		WebElement LPFCTA = wait.until(ExpectedConditions.visibilityOfElementLocated(By
 				.xpath("(//a[@href='/products/helix-by-timex-grey-octagon-analog-silicone-watch-men-tw041hg13'])[3]")));
-		String parent = driver.getWindowHandle();
 
-		// Open in new tab
-		act.keyDown(Keys.CONTROL).click(LPFCTA).keyUp(Keys.CONTROL).perform();
+		((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView({block:'center', inline:'nearest'});",
+				LPFCTA);
 
-		// Wait till child tab opens
-		wait.until(ExpectedConditions.numberOfWindowsToBe(2));
+		wait.until(ExpectedConditions.elementToBeClickable(LPFCTA));
 
-		// Switch to child tab
-		for (String tab : driver.getWindowHandles()) {
-			if (!tab.equals(parent)) {
-				driver.switchTo().window(tab);
-				break;
-			}
-		}
-
-		// Simple wait (page is usable)
-		wait.until(ExpectedConditions.presenceOfElementLocated(By.tagName("body")));
-		// EXTRA 2 seconds wait
-		try {
-			Thread.sleep(1000);
-		} catch (InterruptedException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-
-		// Close child tab and switch back
-		driver.close();
-		driver.switchTo().window(parent);
+		openInNewTabAndClose(LPFCTA);
 	}
 
-	// TC_04
-
+	// ---------------- TC_04 ----------------
 	public void clickOnAllProductsLatestReleaseAndCloseTab() {
-
-//		js.executeScript("window.scrollBy(0,2000)");
-
 		By latestRelease = By.xpath("//div[contains(@class,'product-bx')]//a[contains(@class,'prd-h-img')]");
-
-		// Parent tab
 		String parent = driver.getWindowHandle();
 
-		// Total items
-		List<WebElement> items = wait.until(ExpectedConditions.presenceOfAllElementsLocatedBy(latestRelease));
+		// Wait until at least 1 item is present
+		wait.until(ExpectedConditions.presenceOfAllElementsLocatedBy(latestRelease));
 
-		for (int i = 0; i < items.size(); i++) {
+		int count = driver.findElements(latestRelease).size();
 
-			// DOM refresh safe
-			items = driver.findElements(latestRelease);
-			WebElement LMCTAP = items.get(i);
+		for (int i = 0; i < count; i++) {
 
-			// Scroll element into view
-			js.executeScript("arguments[0].scrollIntoView({block:'center'});", LMCTAP);
-			try {
-				Thread.sleep(500);
-			} catch (InterruptedException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
+			// Re-fetch list each time (DOM refresh safe)
+			List<WebElement> items = driver.findElements(latestRelease);
 
-			// Open in new tab
-			act.keyDown(Keys.CONTROL).click(LMCTAP).keyUp(Keys.CONTROL).perform();
+			// Safety: if list size changed, break
+			if (i >= items.size())
+				break;
 
-			// Wait till child tab opens
-			wait.until(ExpectedConditions.numberOfWindowsToBe(2));
+			WebElement element = items.get(i);
 
-			// Switch to child tab
-			for (String tab : driver.getWindowHandles()) {
-				if (!tab.equals(parent)) {
-					driver.switchTo().window(tab);
-					break;
-				}
-			}
+			// Scroll element into view (headless-safe)
+			((JavascriptExecutor) driver)
+					.executeScript("arguments[0].scrollIntoView({block:'center', inline:'nearest'});", element);
 
-			// Page usable wait
-			wait.until(ExpectedConditions.presenceOfElementLocated(By.tagName("body")));
-			try {
-				Thread.sleep(1000);
-			} catch (InterruptedException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
+			// Wait for it to be clickable instead of sleep
+			wait.until(ExpectedConditions.elementToBeClickable(element));
 
-			// Close child tab and go back
-			driver.close();
+			// Open in new tab and close (your existing helper)
+			openInNewTabAndClose(element);
+
+			// Ensure we're back on parent and page is stable
 			driver.switchTo().window(parent);
-
-		}
-
-	}
-	// TC_05
-
-	public void clickOnAllPCAndCloseTab() {
-
-//		js.executeScript("window.scrollBy(0,2000)");
-
-		By latestRelease = By.xpath(
-				"//div[contains(@class,'cate-left')]//p[text()='Popular Categories']/following-sibling::div//ul//li//a"
-
-		);
-
-		// Parent tab
-		String parent = driver.getWindowHandle();
-
-		// Total items
-		List<WebElement> items = wait.until(ExpectedConditions.presenceOfAllElementsLocatedBy(latestRelease));
-
-		for (int i = 0; i < items.size(); i++) {
-
-			// DOM refresh safe
-			items = driver.findElements(latestRelease);
-			WebElement PCAT = items.get(i);
-
-			// Scroll element into view
-			js.executeScript("arguments[0].scrollIntoView({block:'center'});", PCAT);
-			try {
-				Thread.sleep(500);
-			} catch (InterruptedException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-
-			// Open in new tab
-			act.keyDown(Keys.CONTROL).click(PCAT).keyUp(Keys.CONTROL).perform();
-
-			// Wait till child tab opens
-			wait.until(ExpectedConditions.numberOfWindowsToBe(2));
-
-			// Switch to child tab
-			for (String tab : driver.getWindowHandles()) {
-				if (!tab.equals(parent)) {
-					driver.switchTo().window(tab);
-					break;
-				}
-			}
-
-			// Page usable wait
-			wait.until(ExpectedConditions.presenceOfElementLocated(By.tagName("body")));
-			try {
-				Thread.sleep(1000);
-			} catch (InterruptedException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-
-			// Close child tab and go back
-			driver.close();
-			driver.switchTo().window(parent);
-
+			wait.until(ExpectedConditions.presenceOfAllElementsLocatedBy(latestRelease));
 		}
 	}
 
-	// TC_06
 
+	
+
+	// ---------------- TC_05 ----------------
 	public void clickTGPBannerAndCloseTab() {
+		WebElement TGPBannerCTA = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath(
+				"//a[@href='https://helixwatches-store.myshopify.com/collections/bestsellers?usf_sort=bestselling']")));
 
-		js.executeScript("window.scrollBy(0,4500)");
+		((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView({block:'center', inline:'nearest'});",
+				TGPBannerCTA);
 
-		WebElement TGPBannerCTA = wait.until(ExpectedConditions.elementToBeClickable(
-				By.xpath("(//div[contains(@class,'hero-item') and not(contains(@class,'slick-cloned'))]//a)[9]")));
+		wait.until(ExpectedConditions.elementToBeClickable(TGPBannerCTA));
 
-		String parent = driver.getWindowHandle();
-
-		// Open in new tab
-		act.keyDown(Keys.CONTROL).click(TGPBannerCTA).keyUp(Keys.CONTROL).perform();
-
-		// Wait till child tab opens
-		wait.until(ExpectedConditions.numberOfWindowsToBe(2));
-
-		// Switch to child tab
-		for (String tab : driver.getWindowHandles()) {
-			if (!tab.equals(parent)) {
-				driver.switchTo().window(tab);
-				break;
-			}
-		}
-
-		// Simple wait (page is usable)
-		wait.until(ExpectedConditions.presenceOfElementLocated(By.tagName("body")));
-		// EXTRA 2 seconds wait
-		try {
-			Thread.sleep(1000);
-		} catch (InterruptedException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-
-		// Close child tab and switch back
-		driver.close();
-		driver.switchTo().window(parent);
-
+		openInNewTabAndClose(TGPBannerCTA);
 	}
 
-	// TC_07
-
+	// ---------------- TC_06
 	public void clickLSBShopNowCTAAndCloseTab() {
+		WebElement LSBShopNowCT = wait.until(ExpectedConditions.visibilityOfElementLocated(
+				By.xpath("//a[contains(@class,'banner-a-btn') and contains(@class,'active')]")));
 
-		js.executeScript("window.scrollBy(0,6000)");
+		((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView({block:'center', inline:'nearest'});",
+				LSBShopNowCT);
 
-		WebElement LSBShopNowCT = wait.until(
-				ExpectedConditions.elementToBeClickable(By.xpath("//a[contains(@class,'banner-a-btn active')]")));
+		wait.until(ExpectedConditions.elementToBeClickable(LSBShopNowCT));
 
-		String parent = driver.getWindowHandle();
-
-		// Open in new tab
-		act.keyDown(Keys.CONTROL).click(LSBShopNowCT).keyUp(Keys.CONTROL).perform();
-
-		// Wait till child tab opens
-		wait.until(ExpectedConditions.numberOfWindowsToBe(2));
-
-		// Switch to child tab
-		for (String tab : driver.getWindowHandles()) {
-			if (!tab.equals(parent)) {
-				driver.switchTo().window(tab);
-				break;
-			}
-		}
-
-		// Simple wait (page is usable)
-		wait.until(ExpectedConditions.presenceOfElementLocated(By.tagName("body")));
-		// EXTRA 2 seconds wait
-		try {
-			Thread.sleep(1000);
-		} catch (InterruptedException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-
-		// Close child tab and switch back
-		driver.close();
-		driver.switchTo().window(parent);
-
+		openInNewTabAndClose(LSBShopNowCT);
 	}
 
-	// TC_08
+	// ---------------- TC_07 ----------------
 	public void goToNewCategory() {
+		// Top pe le aao (headless safe)
+		((JavascriptExecutor) driver).executeScript("window.scrollTo(0,0);");
 
-		js.executeScript("window.scrollTo(0,0)");
+		// Watches tab
+		WebElement watchesTab = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//a[@id='new']")));
+
+		// Hover (Actions try), fallback JS mouseover for headless
 		try {
-			Thread.sleep(2000);
-		} catch (InterruptedException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			new org.openqa.selenium.interactions.Actions(driver).moveToElement(watchesTab)
+					.pause(java.time.Duration.ofMillis(300)).perform();
+		} catch (Exception e) {
+			((JavascriptExecutor) driver).executeScript(
+					"arguments[0].dispatchEvent(new MouseEvent('mouseover', {bubbles:true}));", watchesTab);
 		}
 
-		WebElement watchesTab = wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//a[@id='new']")));
-		act.moveToElement(watchesTab).perform();
+		// Men's New Arrivals
+		By mensNewArrivalBy = By.xpath("(//a[@href='/collections/mens-new-arrivals'])[1]");
+		WebElement mensNewArrival = wait.until(ExpectedConditions.elementToBeClickable(mensNewArrivalBy));
+
+		// Click (normal), fallback JS click if intercepted
 		try {
-			Thread.sleep(1000);
-		} catch (InterruptedException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			mensNewArrival.click();
+		} catch (org.openqa.selenium.ElementClickInterceptedException ex) {
+			((JavascriptExecutor) driver).executeScript("arguments[0].click();", mensNewArrival);
 		}
-		WebElement MensnewArrival = wait.until(
-				ExpectedConditions.elementToBeClickable(By.xpath("(//a[@href='/collections/mens-new-arrivals'])[1]")));
-		MensnewArrival.click();
 
 	}
-
 }

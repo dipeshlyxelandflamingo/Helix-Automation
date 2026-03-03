@@ -1,5 +1,7 @@
 package Pages;
 
+import java.time.Duration;
+
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.Keys;
@@ -15,9 +17,10 @@ public class Checkout {
 	WebDriverWait wait;
 	JavascriptExecutor js;
 
-	public Checkout(WebDriver driver, WebDriverWait wait) {
+	public Checkout(WebDriver driver) {
 		this.driver = driver;
-		this.wait = wait;
+		boolean isLinux = System.getProperty("os.name", "").toLowerCase().contains("linux");
+		this.wait = new WebDriverWait(driver, Duration.ofSeconds(isLinux ? 35 : 20));
 		this.js = (JavascriptExecutor) driver;
 	}
 
@@ -31,39 +34,121 @@ public class Checkout {
 
 	public void fillCheckoutForm() throws Exception {
 
-		wait.until(ExpectedConditions.elementToBeClickable(By.id("email"))).sendKeys("automationtest3j@gmail.com");
+		 try {
+		        // --- Locators ---
+		        By emailBy = By.id("email");
+		        By firstNameBy = By.name("firstName");
+		        By lastNameBy  = By.name("lastName");
+		        By address1By  = By.name("address1");
+		        By cityBy      = By.name("city");
+		        By pinBy       = By.name("postalCode");
+		        By phoneBy     = By.name("phone");
 
-		// name
-		WebElement fname = wait.until(ExpectedConditions.visibilityOfElementLocated(By.name("firstName")));
-		fname.sendKeys("Test");
+		        // Shopify checkout address suggestions (most reliable)
+		        By suggestionsBy = By.cssSelector("[role='listbox'] [role='option']");
 
-		// last name
-		WebElement lname = wait.until(ExpectedConditions.visibilityOfElementLocated(By.name("lastName")));
-		lname.sendKeys("Singh");
+		        // --- Email ---
+		        typeSlow(emailBy, "automationtest3j@gmail.com", 60);
 
-		// address by dropdown
-		WebElement Add1 = wait.until(ExpectedConditions.visibilityOfElementLocated(By.name("address1")));
-		Add1.sendKeys("Noida city center Sector 39");
-		Thread.sleep(3000);
+		        // --- Name ---
+		        typeSlow(firstNameBy, "Test", 80);
+		        typeSlow(lastNameBy, "Singh", 80);
 
-		// first suggestion select
-		Add1.sendKeys(Keys.ARROW_DOWN);
-		Thread.sleep(2000);
-		Add1.sendKeys(Keys.ENTER);
+		        // --- Address (autocomplete) ---
+		        WebElement add1 = wait.until(ExpectedConditions.elementToBeClickable(address1By));
+		        add1.click();
+		        clearField(add1);
 
-		WebElement city = wait.until(ExpectedConditions.visibilityOfElementLocated(By.name("city")));
-		city.sendKeys("Noida");
-		Thread.sleep(1000);
+		        // Type in 2 parts so suggestions load properly
+		        typeSlow(add1, "Noida city center", 70);
 
-		WebElement pincode = wait.until(ExpectedConditions.visibilityOfElementLocated(By.name("postalCode")));
-		pincode.clear();
-		pincode.sendKeys("201303");
+		        // Wait for suggestions (if they don't appear, proceed anyway)
+		        waitUntilSuggestions(suggestionsBy, 1, 10);
 
-		WebElement mobile = wait
-				.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//input[@name='phone']")));
-		mobile.sendKeys("9876543210");
+		        typeSlow(add1, " Sector 39", 70);
+		        waitUntilSuggestions(suggestionsBy, 1, 10);
 
-	}
+		        // Select first suggestion (keyboard is best in headless)
+		        add1.sendKeys(Keys.ARROW_DOWN);
+		        add1.sendKeys(Keys.ENTER);
+
+		        // Wait a bit for autofill to populate city/state/pin (condition-based, not sleep)
+		        wait.until(ExpectedConditions.visibilityOfElementLocated(cityBy));
+
+		        // --- City (only fill if not auto-filled) ---
+		        WebElement city = driver.findElement(cityBy);
+		        if (isBlank(city.getAttribute("value"))) {
+		            typeSlow(cityBy, "Noida", 70);
+		        }
+
+		        // --- PIN (only fill if not auto-filled) ---
+		        WebElement pin = driver.findElement(pinBy);
+		        if (isBlank(pin.getAttribute("value"))) {
+		            clearField(pin);
+		            typeSlow(pinBy, "201303", 70);
+		        }
+
+		        // --- Phone ---
+		        WebElement phone = wait.until(ExpectedConditions.elementToBeClickable(phoneBy));
+		        if (isBlank(phone.getAttribute("value"))) {
+		            clearField(phone);
+		            typeSlow(phoneBy, "9876543210", 60);
+		        }
+
+		    } catch (Exception e) {
+		        throw new RuntimeException("❌ Failed to fill checkout form", e);
+		    }
+		}
+
+		/* ================= Helpers ================= */
+
+		private void typeSlow(By by, String text, int delayMs) {
+		    WebElement el = wait.until(ExpectedConditions.elementToBeClickable(by));
+		    el.click();
+		    clearField(el);
+		    typeSlow(el, text, delayMs);
+		}
+
+		private void typeSlow(WebElement el, String text, int delayMs) {
+		    for (char c : text.toCharArray()) {
+		        el.sendKeys(String.valueOf(c));
+		        sleepSilently(delayMs);
+		    }
+		}
+
+		private void clearField(WebElement el) {
+		    try {
+		        el.sendKeys(Keys.chord(Keys.CONTROL, "a"));
+		        el.sendKeys(Keys.BACK_SPACE);
+		    } catch (Exception e) {
+		        el.clear();
+		    }
+		}
+
+		private void sleepSilently(int ms) {
+		    try {
+		        Thread.sleep(ms);
+		    } catch (InterruptedException ignored) {
+		        Thread.currentThread().interrupt();
+		    }
+		}
+
+		/**
+		 * Waits up to maxSeconds for at least minCount suggestions to appear.
+		 * Returns true if suggestions appeared, false otherwise.
+		 */
+		private boolean waitUntilSuggestions(By suggestionsBy, int minCount, int maxSeconds) {
+		    try {
+		        WebDriverWait shortWait = new WebDriverWait(driver, Duration.ofSeconds(maxSeconds));
+		        return shortWait.until(d -> d.findElements(suggestionsBy).size() >= minCount);
+		    } catch (Exception ignored) {
+		        return false;
+		    }
+		}
+
+		private boolean isBlank(String s) {
+		    return s == null || s.trim().isEmpty();
+		}
 
 	public void clickPayNow() throws Exception {
 		Thread.sleep(3000);

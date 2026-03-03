@@ -18,14 +18,33 @@ public class PLPPage {
 	JavascriptExecutor js;
 	Actions act;
 
-	public PLPPage(WebDriver driver) {
-		this.driver = driver;
-		this.wait = new WebDriverWait(driver, Duration.ofSeconds(15));
-		this.js = (JavascriptExecutor) driver;
-		this.act = new Actions(driver);
+	private static final String PLP_URL = "https://helix-watches.com/collections/mens-new-arrivals?usf_sort=bestselling";
+	private static final String PLP_URL_CONTAINS = "/collections/mens-new-arrivals";
+
+	public void openPLP() {
+		ensureOnPLP();
 	}
 
-	public void ClickDialShapeFilter(String filterValue, int expectedCount) {
+	private void ensureOnPLP() {
+		String currentUrl = driver.getCurrentUrl();
+
+		if (currentUrl == null || !currentUrl.contains(PLP_URL_CONTAINS)) {
+			System.out.println("⚠️ Not on PLP. Navigating directly to PLP.");
+			driver.get(PLP_URL);
+		} else {
+			System.out.println("✔ Already on PLP.");
+		}
+	}
+
+	public PLPPage(WebDriver driver) {
+		this.driver = driver;
+		boolean isLinux = System.getProperty("os.name", "").toLowerCase().contains("linux");
+		this.wait = new WebDriverWait(driver, Duration.ofSeconds(isLinux ? 35 : 20));
+		this.js = (JavascriptExecutor) driver;
+
+	}
+
+	public void ClickDialShapeFilter(String filterValue, int expectedCount) throws Exception {
 		WebElement OpenDialShapeFilter = wait.until(ExpectedConditions.elementToBeClickable(
 				By.xpath("//div[@class='usf-title usf-no-select']//button[contains(text(),'Dial Shape')]")));
 		js.executeScript("arguments[0].scrollIntoView({block:'center'});", OpenDialShapeFilter);
@@ -37,18 +56,19 @@ public class PLPPage {
 		js.executeScript("arguments[0].scrollIntoView({block:'center'});", SelectDialShapeFilter);
 		js.executeScript("arguments[0].click();", SelectDialShapeFilter);
 
-		js.executeScript("arguments[0].scrollIntoView({block:'center'});", OpenDialShapeFilter);
-		js.executeScript("arguments[0].click();", OpenDialShapeFilter);
-
 		waitForProductsToLoad();
 		validateProductCount(expectedCount);
-
+		Thread.sleep(2000);
 		ClickOnClearbutton();
-		waitForProductsToLoad();
+
+		WebElement CloseDialShapeFilter = wait.until(ExpectedConditions.elementToBeClickable(
+				By.xpath("//div[@class='usf-title usf-no-select']//button[contains(text(),'Dial Shape')]")));
+		js.executeScript("arguments[0].scrollIntoView({block:'center'});", CloseDialShapeFilter);
+		js.executeScript("arguments[0].click();", CloseDialShapeFilter);
 
 	}
 
-	public void ClickAttachmentTypeFilter(String filterValue, int expectedCount) {
+	public void ClickAttachmentTypeFilter(String filterValue, int expectedCount) throws Exception {
 
 		WebElement OpenAttachmentTypeFilter = wait.until(ExpectedConditions.elementToBeClickable(
 				By.xpath("//div[@class='usf-title usf-no-select']//button[contains(text(),' Attachment Type')]")));
@@ -61,61 +81,67 @@ public class PLPPage {
 		js.executeScript("arguments[0].scrollIntoView({block:'center'});", SelectAttachmentTypeFilter);
 		js.executeScript("arguments[0].click();", SelectAttachmentTypeFilter);
 
-		js.executeScript("arguments[0].scrollIntoView({block:'center'});", OpenAttachmentTypeFilter);
-		js.executeScript("arguments[0].click();", OpenAttachmentTypeFilter);
-
 		waitForProductsToLoad();
 		validateProductCount(expectedCount);
-
+		Thread.sleep(800);
 		ClickOnClearbutton();
 		waitForProductsToLoad();
 
+		js.executeScript("arguments[0].scrollIntoView({block:'center'});", OpenAttachmentTypeFilter);
+		js.executeScript("arguments[0].click();", OpenAttachmentTypeFilter);
+
 	}
 
-	public void ClickDialColorFilter(String filterValue, int expectedCount) {
+	public void ClickDialColorFilter(String filterValue, int expectedCount) throws Exception {
 
 		WebElement OpenDialColorFilter = wait.until(ExpectedConditions.elementToBeClickable(
 				By.xpath("//div[@class='usf-title usf-no-select']//button[contains(text(),'Dial Color')]")));
 		js.executeScript("arguments[0].scrollIntoView({block:'center'});", OpenDialColorFilter);
+		Thread.sleep(800);
 		js.executeScript("arguments[0].click();", OpenDialColorFilter);
 
 		WebElement SelectDialColorFilter = wait.until(ExpectedConditions.elementToBeClickable(
 				By.xpath("//div[contains(@class,'usf-facet-values')]//button[.//span[normalize-space()='" + filterValue
 						+ "']]")));
 		js.executeScript("arguments[0].scrollIntoView({block:'center'});", SelectDialColorFilter);
+		Thread.sleep(800);
 		js.executeScript("arguments[0].click();", SelectDialColorFilter);
-
-		js.executeScript("arguments[0].scrollIntoView({block:'center'});", OpenDialColorFilter);
-		js.executeScript("arguments[0].click();", OpenDialColorFilter);
 
 		waitForProductsToLoad();
 		validateProductCount(expectedCount);
-
+		Thread.sleep(800);
 		ClickOnClearbutton();
 		waitForProductsToLoad();
 
+		js.executeScript("arguments[0].scrollIntoView({block:'center'});", OpenDialColorFilter);
+		Thread.sleep(800);
+		js.executeScript("arguments[0].click();", OpenDialColorFilter);
+
 	}
 
-	public void ClickStrapColorFilter(String filterValue, int expectedCount) {
+	public void ClickStrapColorFilter(String filterValue, int expectedCount) throws Exception {
 
 		WebElement OpenStrapColorFilter = wait.until(ExpectedConditions.elementToBeClickable(
 				By.xpath("//div[@class='usf-title usf-no-select']//button[contains(text(),'Strap Color')]")));
 		js.executeScript("arguments[0].scrollIntoView({block:'center'});", OpenStrapColorFilter);
+		Thread.sleep(800);
 		js.executeScript("arguments[0].click();", OpenStrapColorFilter);
 
 		WebElement SelectStrapColorFilter = wait.until(ExpectedConditions.elementToBeClickable(
 				By.xpath("//div[contains(@class,'usf-facet-values--Swatch')]//button[@title='" + filterValue + "']")));
 		js.executeScript("arguments[0].scrollIntoView({block:'center'});", SelectStrapColorFilter);
+		Thread.sleep(800);
 		js.executeScript("arguments[0].click();", SelectStrapColorFilter);
-
-		js.executeScript("arguments[0].scrollIntoView({block:'center'});", OpenStrapColorFilter);
-		js.executeScript("arguments[0].click();", OpenStrapColorFilter);
 
 		waitForProductsToLoad();
 		validateProductCount(expectedCount);
-
+		Thread.sleep(800);
 		ClickOnClearbutton();
 		waitForProductsToLoad();
+
+		js.executeScript("arguments[0].scrollIntoView({block:'center'});", OpenStrapColorFilter);
+		Thread.sleep(800);
+		js.executeScript("arguments[0].click();", OpenStrapColorFilter);
 
 	}
 
@@ -135,17 +161,48 @@ public class PLPPage {
 	}
 
 	private void validateProductCount(int expectedCount) {
-		WebElement summary = driver.findElement(By.xpath("//span[contains(@class,'usf-sr-summary')]/b"));
-		String summaryText = summary.getText();
-		int actualCount = Integer.parseInt(summaryText.replaceAll("[^0-9]", ""));
-		Assert.assertEquals(actualCount, expectedCount, "Expected product count does not match filtered result");
+
+	    By summaryBy = By.xpath("//span[contains(@class,'usf-sr-summary')]");
+
+	    // Wait until summary appears and text is populated
+	    WebElement summary = wait.until(
+	        ExpectedConditions.visibilityOfElementLocated(summaryBy)
+	    );
+
+	    // Wait until it contains number + products
+	    wait.until(ExpectedConditions.textToBePresentInElement(summary, "products"));
+
+	    String summaryText = summary.getText();   // e.g. "1 products"
+
+	    int actualCount = Integer.parseInt(summaryText.replaceAll("[^0-9]", ""));
+
+	    Assert.assertEquals(
+	        actualCount,
+	        expectedCount,
+	        "Expected product count does not match filtered result"
+	    );
 	}
 
 	private void ClickOnClearbutton() {
-		WebElement clearBtn = driver.findElement(By.xpath("(//button[@class='usf-clear-all usf-btn'])[1]"));
-		js.executeScript("arguments[0].scrollIntoView({block:'center'});", clearBtn);
-		js.executeScript("arguments[0].click();", clearBtn);
+		By clearBtnBy = By.xpath("//button[@aria-label='Clear all filters' and contains(@class,'usf-clear-all')]");
 
+		WebElement clearBtn = wait.until(ExpectedConditions.visibilityOfElementLocated(clearBtnBy));
+
+		((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView({block:'center', inline:'nearest'});",
+				clearBtn);
+
+		// Wait until button is actually clickable
+		wait.until(ExpectedConditions.elementToBeClickable(clearBtnBy));
+		
+
+		// Re-locate after wait (DOM refresh safe)
+		clearBtn = driver.findElement(clearBtnBy);
+
+		try {
+			clearBtn.click(); // normal click first
+		} catch (Exception e) {
+			((JavascriptExecutor) driver).executeScript("arguments[0].click();", clearBtn); // JS fallback
+		}
 	}
 
 }

@@ -5,10 +5,8 @@
     <classes>
       <class name="TestPages.CheckoutTest">
         <methods>
-          <include name="TC_01_verifyCheckoutPage"/>
-          <include name="TC_03_clickPayNow"/>
           <include name="setUpClass"/>
-          <include name="TC_02_fillCheckoutForm"/>
+          <include name="VerifyCheckoutEnable"/>
           <include name="initFlow"/>
         </methods>
       </class> <!-- TestPages.CheckoutTest -->

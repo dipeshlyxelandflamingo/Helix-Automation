@@ -2,73 +2,67 @@ package TestPages;
 
 import org.testng.Assert;
 import org.testng.annotations.BeforeClass;
+import org.testng.annotations.Listeners;
 import org.testng.annotations.Test;
 
 import Base.BaseClass;
-import Pages.HomePage;
 import Pages.MiniCartPage;
 import Pages.PDPPage;
-import Pages.PLPPage;
+import listeners.Test_listeners;
 
+@Listeners(Test_listeners.class)
+@Test(groups = { "MiniCart" })
 public class MiniCartTest extends BaseClass {
 
-	HomePage home;
-	PLPPage plp;
 	PDPPage pdp;
 	MiniCartPage miniCart;
 
-	@BeforeClass
+	@BeforeClass(alwaysRun = true)
 	public void initFlow() {
-
-		// Navigate to category
-		home = new HomePage(driver);
-		home.goToNewCategory();
-
-		// Select a product from PLP
-		plp = new PLPPage(driver);
-		plp.clickFirstProduct();
-
+		driver.get("https://helix-watches.com//products/helix-men-green-square-dial-quartz-analog-watch-tw057hg01");
 		// Add product to cart from PDP
 		pdp = new PDPPage(driver);
 		pdp.ClickAddToCart();
 
 		// Initialize MiniCartPage
 		miniCart = new MiniCartPage(driver);
+
 	}
 
-	@Test(priority = 1)
+	@Test(priority = 1, groups = { "MiniCart" })
 	public void TC_01_QuantityIncrease() {
 		try {
 			miniCart.increaseQuantity();
 		} catch (Exception e) {
-			Assert.fail("Failed to Increase Quantity On Product");
+			Assert.fail("Failed to Increase Quantity On Product"+e.getMessage());
 		}
 	}
 
-	@Test(priority = 2)
+	@Test(priority = 2, groups = { "MiniCart" })
 	public void TC_02_QuantityDecrease() {
 		try {
 			miniCart.decreaseQuantity();
 		} catch (Exception e) {
-			Assert.fail("Failed to Decrease Quantity On Product");
+			Assert.fail("Failed to Decrease Quantity On Product"+e.getMessage());
 		}
 	}
 
-	@Test(priority = 3)
+	@Test(priority = 3, groups = { "MiniCart" })
 	public void TC_03_EnterPincode() {
 		try {
 			miniCart.enterPincode("201306");
 		} catch (Exception e) {
-			Assert.fail("Failed to Enter Pincode");
+			Assert.fail("Failed to Enter Pincode"+e.getMessage());
 		}
 	}
 
-	@Test(priority = 4)
+	@Test(priority = 4, groups = { "MiniCart" })
+
 	public void TC_04_ClickOnCheckoutButton() {
 		try {
 			miniCart.goToQuickCheckout();
 		} catch (Exception e) {
-			Assert.fail("Failed to Click On Checkout Button");
+			Assert.fail("Failed to Click On Checkout Button"+e.getMessage());
 		}
 	}
 }

@@ -1,8 +1,13 @@
 package Base;
 
+import java.io.File;
 import java.time.Duration;
 
+import org.apache.commons.io.FileUtils;
 import org.openqa.selenium.JavascriptExecutor;
+import org.openqa.selenium.OutputType;
+import org.openqa.selenium.TakesScreenshot;
+import org.openqa.selenium.UnexpectedAlertBehaviour;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
@@ -15,23 +20,26 @@ import io.github.bonigarcia.wdm.WebDriverManager;
 
 public class BaseClass {
 
-	protected WebDriver driver;
-	protected JavascriptExecutor js;
-	protected Actions act;
-	protected WebDriverWait wait;
+	public WebDriver driver;
+	public JavascriptExecutor js;
+	public Actions act;
+	public WebDriverWait wait;
 
-	@BeforeClass
+	@BeforeClass(alwaysRun = true)
 	public void setUpClass() {
-
+		boolean isLinux = System.getProperty("os.name", "").toLowerCase().contains("linux");
 		WebDriverManager.chromedriver().setup();
 
 		ChromeOptions options = new ChromeOptions();
 		options.addArguments("--disable-blink-features=AutomationControlled");
-		options.addArguments("start-maximized");
-		options.addArguments(
-				"user-agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/142.0.7444.134 Safari/537.36");
+		options.addArguments("user-agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64)");
+		options.addArguments("--disable-notifications");
+		options.addArguments("--disable-popup-blocking");
+		options.addArguments("--lang=en-US");
+		options.addArguments("--remote-allow-origins=*");
+		options.setUnhandledPromptBehaviour(UnexpectedAlertBehaviour.ACCEPT);
 
-		if (System.getProperty("os.name").toLowerCase().contains("linux")) {
+		if (isLinux) {
 			options.addArguments("--headless=new");
 			options.addArguments("--no-sandbox");
 			options.addArguments("--disable-dev-shm-usage");
@@ -41,12 +49,19 @@ public class BaseClass {
 
 		options.setExperimentalOption("excludeSwitches", new String[] { "enable-automation" });
 		options.setExperimentalOption("useAutomationExtension", false);
-		options.addArguments("--remote-allow-origins=*");
 
 		driver = new ChromeDriver(options);
 
-		driver.manage().window().maximize();
-		driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(5));
+		driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(0));
+		driver.manage().timeouts().pageLoadTimeout(Duration.ofSeconds(120));
+		driver.manage().timeouts().scriptTimeout(Duration.ofSeconds(60));
+
+		if (!isLinux)
+			driver.manage().window().maximize();
+
+		wait = new WebDriverWait(driver, Duration.ofSeconds(isLinux ? 35 : 20));
+		js = (JavascriptExecutor) driver;
+		act = new Actions(driver);
 
 		driver.get("https://helix-watches.com");
 
@@ -56,7 +71,7 @@ public class BaseClass {
 
 	}
 
-	@AfterClass
+	@AfterClass(alwaysRun = true)
 	public void tearDownClass() {
 		if (driver != null) {
 			driver.quit();

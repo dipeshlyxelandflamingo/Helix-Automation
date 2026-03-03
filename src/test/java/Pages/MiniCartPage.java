@@ -21,9 +21,10 @@ public class MiniCartPage {
 
 	public MiniCartPage(WebDriver driver) {
 		this.driver = driver;
-		this.wait = new WebDriverWait(driver, Duration.ofSeconds(15));
+		boolean isLinux = System.getProperty("os.name", "").toLowerCase().contains("linux");
+		this.wait = new WebDriverWait(driver, Duration.ofSeconds(isLinux ? 35 : 20));
 		this.js = (JavascriptExecutor) driver;
-		this.act = new Actions(driver);
+		
 	}
 
 	// ---------- Quantity Increase ----------
@@ -34,7 +35,7 @@ public class MiniCartPage {
 			WebElement qtyPlusBtn = wait
 					.until(ExpectedConditions.elementToBeClickable(By.xpath("//button[contains(@class,'qty-plus')]")));
 
-			qtyPlusBtn.click();
+			js.executeScript("arguments[0].click();", qtyPlusBtn);
 			try {
 				Thread.sleep(1000);
 			} catch (InterruptedException e) {
@@ -59,7 +60,7 @@ public class MiniCartPage {
 			WebElement qtyMinusBtn = wait
 					.until(ExpectedConditions.elementToBeClickable(By.xpath("//button[@class='qty-minus']")));
 
-			qtyMinusBtn.click();
+			js.executeScript("arguments[0].click();", qtyMinusBtn);
 			try {
 				Thread.sleep(1000);
 			} catch (InterruptedException e) {
@@ -86,7 +87,7 @@ public class MiniCartPage {
 	// ---------- Quick Checkout ----------
 	public void goToQuickCheckout() {
 		WebElement checkoutBtn = wait.until(ExpectedConditions.elementToBeClickable(By.id("checkout")));
-		checkoutBtn.click();
+		js.executeScript("arguments[0].click();", checkoutBtn);
 		System.out.println("✔ Quick checkout initiated");
 	}
 }
